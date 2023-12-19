@@ -3,15 +3,15 @@
 /**
  * main - Entry point
  *
- * Result: Always 0(Success)
+ * Return: Always 0(Success)
  */
 
 int main(void)
 {
-	printf("size of a char: %zu\n", sizeof(char));
-	printf("size of an int: %zu\n", sizeof(int));
-	printf("size of a long int: %zu\n", sizeof(long int));
-	printf("size of a long long int: %zu\n", sizeof(long long int));
-	printf("size of a float: %zu\n", sizeof(float));
+	printf("size of a char: %u\n", sizeof(char));
+	printf("size of an int: %u\n", sizeof(int));
+	printf("size of a long int: %u\n", sizeof(long));
+	printf("size of a long long int: %u\n", sizeof(long long));
+	printf("size of a float: %u\n", sizeof(float));
 	return (0);
 }
