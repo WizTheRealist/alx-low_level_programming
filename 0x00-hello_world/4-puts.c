@@ -1,5 +1,9 @@
 /**
- * a program that uses the puts function and returns 0
+ * a program that uses the puts function
+ *
+ * main - void
+ *
+ * return - always success
  *
  */
 
