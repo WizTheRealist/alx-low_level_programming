@@ -1,11 +1,9 @@
 #include <stdio.h>
 
 /**
- * a program that uses the puts function
+ * main - Entry point
  *
- * main - Entry point of the code
- *
- * Return - Success(0)
+ * Return - Always 0(Success)
  *
  */
 
