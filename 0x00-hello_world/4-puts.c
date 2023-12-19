@@ -1,13 +1,13 @@
+#include <stdio.h>
+
 /**
  * a program that uses the puts function
  *
- * main - void
+ * main - Entry point of the code
  *
- * return - always success
+ * Return - Success(0)
  *
  */
-
-#include <stdio.h>
 
 int main(void)
 {
