@@ -3,7 +3,7 @@
 /**
  * print_alphabet_x10 - a function that prints alphabet
  * ten times
- * Return: 0
+ *
  */
 
 void print_alphabet_x10(void)
@@ -12,7 +12,7 @@ void print_alphabet_x10(void)
 
 	while (c < 0)
 	{
-		int i = 'a';
+		char i = 'a';
 
 		while (i <= 'z')
 		{
