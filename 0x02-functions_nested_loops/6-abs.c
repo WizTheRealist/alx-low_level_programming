@@ -6,8 +6,11 @@
  * Return: a
  */
 
-int _abs(int)
+int _abs(int a)
 {
-	int a = abs(n);
+	if (a < 0)
+	{
+		return (-a);
+	}
 	return (a);
 }
