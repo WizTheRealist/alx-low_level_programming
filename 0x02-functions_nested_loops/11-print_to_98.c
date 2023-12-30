@@ -9,42 +9,32 @@
 
 void print_to_98(int n)
 {
-	for (int k = n; k <= 98; k++)
+	if (n <= 98)
 	{
-		if (k != 98)
+		for (int k = n; k <= 98; k++)
 		{
-			if (k  >= -9 && k <= 9)
+			if (k != 98)
 			{
-				if (k < 0)
-				{
-					-putchar('-');
-					_putchar(-k + '0');
-				}
-				else
-				{
-					_putchar(k + '0');
-				}
-				_putchar(',');
-				_putchar(' ');
+				printf("%d\n, ", k);
 			}
-			else (k >= 10 || k <= -10)
+			else if (k == 98)
 			{
-				if (k < 0)
-				{
-					k = -k;
-					_putchar('-');
-				}
-				_putchar((k / 10) + '0');
-				_putchar((k % 10) + '0');
-				_putchar(',');
-				_putchar(' ');
+				printf("%d\n", k);
 			}
 		}
-		else
+	}
+	else if (n >= 98)
+	{
+		for (k = n; k >= 98; k++)
 		{
-			_putchar((k / 10) + '0');
-			_putchar((k % 10) + '0');
-			_putchar('\n');
+			if (k != 98)
+			{
+				printf("%d, ", k);
+			}
+			else if (k == 98)
+			{
+				printf("%d", k);
+			}
 		}
 	}
 }
