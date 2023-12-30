@@ -11,14 +11,5 @@ int add(int a, int b)
 {
 	int k = a + b;
 
-	if (k <= 9 && k >= -9)
-	{
-		_putchar(k + '0');
-	}
-	else
-	{
-		_putchar((k / 10) + '0');
-		_putchar((k % 10) + '0');
-	}
 	return (k);
 }
