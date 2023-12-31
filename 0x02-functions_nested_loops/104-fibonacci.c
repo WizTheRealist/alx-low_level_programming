@@ -18,7 +18,7 @@ int main(void)
 	{
 		if (count == 98)
 		{
-			printf("%lu\n", next);
+			printf("%lu", next);
 		}
 		else
 		{
@@ -29,5 +29,6 @@ int main(void)
 		b = next;
 		count++;
 	}
+	printf("\n");
 	return (0);
 }
