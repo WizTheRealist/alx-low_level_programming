@@ -1,21 +1,21 @@
-#include <stdlib.h>
 #include "lists.h"
 
 /**
- * list_len - returns the number of elements
- * @h: pointer to list_t
+ * list_len - prints content list
  *
- * Return: number of elements in h
+ * @h: the list
+ * Return: size_t iteration the number of element in the list
  */
-
 size_t list_len(const list_t *h)
 {
-	size_t a = 0;
+	size_t iter = 0;
+
 
 	while (h)
 	{
-		a++;
 		h = h->next;
+		iter++;
 	}
-	return (a);
+
+	return (iter);
 }
