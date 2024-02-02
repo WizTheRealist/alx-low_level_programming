@@ -6,7 +6,6 @@
  * @h: the list
  * Return: size_t iteration the number of element in the list
  */
-
 size_t print_list(const list_t *h)
 {
 	size_t iter = 0;
@@ -19,7 +18,7 @@ size_t print_list(const list_t *h)
 		else
 			printf("[%u] %s\n", h->len, h->str);
 		h = h->next;
-		iteration++;
+		iter++;
 	}
 	return (iter);
 }
