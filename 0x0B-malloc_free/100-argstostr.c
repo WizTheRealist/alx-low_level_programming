@@ -1,53 +1,53 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
  * argstostr - a function that concatenates all the arguments
+ * of your program.
  * @ac: Argument count
- * @av: arguments
+ * @av: The arguments
  *
  * Return: char pointer
  */
 
 char *argstostr(int ac, char **av)
 {
-	char *str = NULL;
-	int i, j, m, size;
+	int i, j, k, size;
+	char *arg;
 
-
-	if (ac > 0 && av != NULL)
+	size = 0;
+	k = 0;
+	if (ac == 0 || av == NULL)
+		return (NULL);
+	i = 0;
+	while (i < ac)
 	{
-		size = 0;
-		for (i = 0; i < ac; i++)
-			size += _strlen(av[i]) + 1;
-
-		str = malloc(size * sizeof(char) + 1);
-		if (str != NULL)
+		j = 0;
+		while (av[i][j])
 		{
-			m = 0;
-			for (i = 0; i < ac; i++)
-			{
-				for (j = 0; av[i][j] != '\0'; j++, m++)
-					str[m] = av[i][j];
-				str[m++] = '\n';
-			}
+			size++;
+			j++;
 		}
+		size++;
+		i++;
 	}
-
-	return (str);
-}
-
-/**
- * _strlen - This function returns the length of a string.
- * @s: The string to return the length
- *
- * Return: Length of s
- */
-int _strlen(char *s)
-{
-	long int len = 0;
-
-	while (s[len] != '\0')
-		len++;
-
-	return (len);
+	arg = malloc((sizeof(char) * size) + 1);
+	if (arg == NULL)
+		return (NULL);
+	i = 0;
+	while (i < ac)
+	{
+		j = 0;
+		while (av[i][j])
+		{
+			arg[k] = av[i][j];
+			j++;
+			k++;
+		}
+		arg[k] = '\n';
+		k++;
+		i++;
+	}
+	arg[k] = '\0';
+	return (arg);
 }
