@@ -1,184 +1,99 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "main.h"
 
-#define STR_TO_INT(val) (val - 48)
-#define INT_TO_STR(val) (val + 48)
-
 /**
- * add_to_result - adds to string from buffer based on the position
+ * is_digit - checks if a string contains a non-digit char
+ * @s: string to be evaluated
  *
- * @string: pointer to the original string
- * @position: for the next iteration
- * @buffer: the result to be added
- * Return: char*
+ * Return: 0 if a non-digit is found, 1 otherwise
  */
-char *add_to_result(char *string, int position, int buffer)
+int is_digit(char *s)
 {
-	int remainder, m;
+	int i = 0;
 
-	string[position] = INT_TO_STR(buffer % 10);
-	if (buffer > 9)
+	while (s[i])
 	{
-		remainder = buffer / 10;
-		for (m = position - 1; string[position] < 9; m--)
-		{
-			string[m] = INT_TO_STR(remainder + STR_TO_INT(string[m]));
-			remainder = 0;
-		}
-		string[m] = INT_TO_STR(remainder + STR_TO_INT(string[m]));
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
 	}
-	return (string);
+	return (1);
 }
 
 /**
- * rid_zeros - removes all the trailing zeros from result
+ * _strlen - returns the length of a string
+ * @s: string to evaluate
  *
- * @string: pointer to the original string
- * @length: length of string
- * Return: char*
+ * Return: the length of the string
  */
-char *rid_zeros(char *string, int length)
+int _strlen(char *s)
 {
-	int flag, iteration;
-	char *replica;
+	int i = 0;
 
-	replica = malloc(sizeof(char) * length);
-
-	for (flag = 0, iteration = 0; *string; string++)
+	while (s[i] != '\0')
 	{
-		if (*string != '0' || flag != 0)
-		{
-			flag = 1;
-			*replica = *string;
-			replica++;
-			continue;
-		}
-		iteration++;
+		i++;
 	}
-	return (replica - length + iteration);
+	return (i);
 }
 
 /**
- * is_int - check for the integer in the string
- *
- * @string: original string
- * Return: int
+ * errors - handles errors for main
  */
-
-int is_int(const char *string)
-{
-	int character;
-
-	for (; *string; string++)
-	{
-		character = STR_TO_INT(*string);
-		if (character >= 0 && character <= 9)
-			continue;
-		return (1);
-	}
-	return (0);
-}
-
-/**
- * error - takes care of errors
- *
- */
-void error(void)
+void errors(void)
 {
 	printf("Error\n");
 	exit(98);
 }
 
 /**
- * length - measures the length of string
+ * main - multiplies two positive numbers
+ * @argc: number of arguments
+ * @argv: array of arguments
  *
- * @string: original string
- * Return: int
+ * Return: always 0 (Success)
  */
-int length(const char *string)
+int main(int argc, char *argv[])
 {
-	int length;
+	char *s1, *s2;
+	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
 
-	for (length = 0; string[length]; length++)
-		;
-	return (length);
-}
-
-/**
- * preliminary_checks - makes some preliminary checks on the string
- *
- * @total: total number of items in the string
- * @str1: string representing integer 1
- * @str2: string representing integer 2
- */
-void preliminary_checks(int total, char const *str1, char const *str2)
-{
-	if (total != 3)
-		error();
-	if (!(is_int(str1) == 0 && is_int(str2) == 0))
-		error();
-}
-
-/**
- * print_answer - prints the answer
- *
- * @string: original string
- */
-
-void print_answer(char const *string)
-{
-	for (; *string; string++)
-		_putchar(*string);
-	_putchar('\n');
-}
-
-/**
- * main - entrypoint to the function
- *
- * @argc: total number of values int
- * @argv: pointer to the original values
- * Return: int
- */
-
-int main(int argc, char const *argv[])
-{
-	int character1, character2, int_buffer, i, j, k, l;
-	int length_s1, length_s2, length_buffer, position, total_length;
-	char *result;
-	char const *ptr1 = argv[1], *ptr2 = argv[2], *buffer;
-
-	preliminary_checks(argc, ptr1, ptr2);
-	length_s1 = length(ptr1);
-	length_s2 = length(ptr2);
-	if (length_s1 < length_s2)
-	{
-		buffer = ptr1;
-		ptr1 = ptr2;
-		ptr2 = buffer;
-		length_buffer = length_s1;
-		length_s1 = length_s2;
-		length_s2 = length_buffer;
-	}
-	total_length = length_s1 * length_s2;
-	result = malloc(sizeof(char) * total_length);
+	s1 = argv[1], s2 = argv[2];
+	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
+		errors();
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
+	len = len1 + len2 + 1;
+	result = malloc(sizeof(int) * len);
 	if (!result)
 		return (1);
-	result[total_length] = '\0';
-	for (i = 0; i < total_length; i++)
-		result[i] = INT_TO_STR(0);
-	for (i = length_s2 - 1, int_buffer = 0, position = total_length - 1, l = 0;
-		 i >= 0; i--, l++)
+	for (i = 0; i <= len1 + len2; i++)
+		result[i] = 0;
+	for (len1 = len1 - 1; len1 >= 0; len1--)
 	{
-		character2 = STR_TO_INT(ptr2[i]);
-		for (j = length_s1 - 1, k = 0; j >= 0; j--, position--, k++)
+		digit1 = s1[len1] - '0';
+		carry = 0;
+		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
 		{
-			character1 = STR_TO_INT(ptr1[j]);
-			int_buffer = (character1 * character2) + STR_TO_INT(result[position]);
-			result = add_to_result(result, position, int_buffer);
+			digit2 = s2[len2] - '0';
+			carry += result[len1 + len2 + 1] + (digit1 * digit2);
+			result[len1 + len2 + 1] = carry % 10;
+			carry /= 10;
 		}
-		position = total_length - l - 2;
+		if (carry > 0)
+			result[len1 + len2 + 1] += carry;
 	}
-	result = rid_zeros(result, total_length);
-	print_answer(result);
+	for (i = 0; i < len - 1; i++)
+	{
+		if (result[i])
+			a = 1;
+		if (a)
+			_putchar(result[i] + '0');
+	}
+	if (!a)
+		_putchar('0');
+	_putchar('\n');
 	free(result);
 	return (0);
 }
